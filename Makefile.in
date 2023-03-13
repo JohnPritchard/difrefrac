@@ -1,0 +1,64 @@
+## "@(#) $Id: Makefile.in 3021 2017-02-01 08:23:08Z jpritcha $"
+# Makefile for lsosc
+
+#  Copyright (C) 2000  J.D.Pritchard
+
+#  This program is free software; you can redistribute it and/or modify
+#  it under the terms of the GNU General Public License as published by
+#  the Free Software Foundation; either version 2 of the License, or
+#  (at your option) any later version.
+
+#  This program is distributed in the hope that it will be useful,
+#  but WITHOUT ANY WARRANTY; without even the implied warranty of
+#  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+#  GNU General Public License for more details.
+
+#  You should have received a copy of the GNU General Public License
+#  along with this program; if not, write to the Free Software
+#  Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
+
+SUBDIRS    = libsrc src
+
+all:
+	set -e; for i in $(SUBDIRS); do\
+	  cd $$i ;\
+	  $(MAKE) all ;\
+	  cd .. ;\
+	done
+
+install:
+	set -e; for i in $(SUBDIRS); do\
+	  cd $$i ;\
+	  $(MAKE) install ;\
+	  cd .. ;\
+	done
+
+.PHONY: clean dep 
+clean:
+	set -e; for i in $(SUBDIRS); do\
+	  cd $$i ;\
+	  $(MAKE) clean ;\
+	  cd .. ;\
+	done
+
+realclean:
+	set -e; for i in $(SUBDIRS); do\
+	  cd $$i ;\
+	  $(MAKE) realclean ;\
+	  cd .. ;\
+	done
+	rm -fv Makefile config.cache config.status config.log
+
+
+## Suffixes ##
+.c.o:
+	$(CC) -c $(INCLUDE) $(CFLAGS) $(GGDB) $(PG) $<
+
+dep:
+	set -e; for i in $(SUBDIRS); do\
+	  cd $$i ;\
+	  $(MAKE) dep ;\
+	  cd .. ;\
+	done
+
+-include .depend

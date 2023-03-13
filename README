@@ -1,0 +1,24 @@
+To compile...
+
+export CC=gcc-mp-4.7
+export CXX=g++-mp-4.7
+export CFLAGS="-I /usr/local/astro/eb/src/libskycalc/include"
+export CXXFLAGS="-I/usr/local/astro/eb/src/libskycalc/include"
+export CPPFLAGS="-I/usr/local/astro/eb/src/libskycalc/include"
+export LDFLAGS="-L/opt/local/lib"
+./configure
+make all
+
+J.D.Pritchard
+2012-02-15
+================================================================================
+1) Run ./configure
+2) edit config.cache to set:
+   ac_cv_header_libskycalc_h=${ac_cv_header_libskycalc_h=yes}
+&
+   ac_cv_lib_skycalc_main=${ac_cv_lib_skycalc_main=yes}
+3) then run ./configure
+4) Then make
+
+J.D.Pritchard
+2003-03-17

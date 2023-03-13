@@ -1,0 +1,72 @@
+## "@(#) $Id: Makefile.in 3021 2017-02-01 08:23:08Z jpritcha $"
+# Makefile for difrefrac
+
+#  Copyright (C) 2000  J.D.Pritchard
+
+#  This program is free software; you can redistribute it and/or modify
+#  it under the terms of the GNU General Public License as published by
+#  the Free Software Foundation; either version 2 of the License, or
+#  (at your option) any later version.
+
+#  This program is distributed in the hope that it will be useful,
+#  but WITHOUT ANY WARRANTY; without even the implied warranty of
+#  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+#  GNU General Public License for more details.
+
+#  You should have received a copy of the GNU General Public License
+#  along with this program; if not, write to the Free Software
+#  Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
+
+CC = @CXX@
+CFLAGS = @CFLAGS@
+#### For Linux
+#CFLAGS = -O -Wall -Wno-unused
+#### For HPUX
+#CFLAGS = -Ae -O -Wall
+LN = ln
+LNOPTS = -sfv
+
+## @have_libskycalch@
+
+STRIP = strip
+
+BIND       = ../bin
+
+LDKD       = ..
+LDKINC     = -I $(LDKD)/include
+LDKLIB     = $(LDKD)/lib
+LDKLIBA    = $(LDKLIB)/libdifrefrac.a
+
+INCLUDE    = $(LDKINC)
+LIBS       = -L$(LDKLIB) -ldifrefrac @LIBS@
+
+SUBDIRS =
+
+all:	$(BIND)/difrefrac
+
+.PHONY: clean dep
+
+clean:
+
+realclean:
+	rm -fv $(BIND)/difrefrac
+	rm -fv Makefile .depend
+
+distclean:
+
+$(BIND)/difrefrac:	difrefrac.cc $(LDKLIBA)
+	$(CC) $(CFLAGS) $(LDFLAGS) -o $(BIND)/difrefrac difrefrac.cc $(LIBS) $(INCLUDE)
+
+$(LDKLIBA)		:
+	  cd ../libsrc ;\
+	  $(MAKE) all ;\
+
+
+## Suffixes ##
+.c.o:
+	$(CC) -c $(INCLUDE) $(CFLAGS) $(GGDB) $(PG) $<
+
+dep:
+	$(CC) -MM -MG ${INCLUDE} *.cc > .depend
+
+-include .depend
