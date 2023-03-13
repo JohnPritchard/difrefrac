@@ -44,6 +44,7 @@ void usage( char ** argv )
              [-PGXWZ]\n\
              [-p <UpDate-Period> [integer sec] (3600)>]\n\
              [-a <HA[i],HA[f],HA[s] [decimal hrs] (-6.0,6.0,1/3600.)>]\n\
+             [-c <RA>,<DEC>]\n\
              [-d <Dec[i],Dec[f],Dec[s] [decimal degrees] (-80.0,+20.0,10.0)>]\n\
              [-w <WL[i],WL[f],WL[s] [nm] (350.0,350.0,200.0>]\n\
              [-x <x[i],x[f] [Zenith Distance range] (0.0,70.0)>]\n\
@@ -246,13 +247,21 @@ RETURN VALUE
   struct option longopts[] =
   {
     /* { name  has_arg  *flag  val } */
-    {"BEoNAlt",       1, 0, 's'}, /* Altitude for Begining/End of night calculation */
-    {"airmass",       1, 0, 'X'}, /* Maximum Airmass */
     {"altitude",      1, 0, 'A'}, /* Minimum Altitude */
-    {"PwrtD",         1, 0, 'D'}, /* Print Differential Refraction not UDP seperation */
+    {"PwrtD",         0, 0, 'D'}, /* Print Differential Refraction not UDP seperation */
+    {"ephemeris",     1, 0, 'E'}, /* Ephemeris */
+    {"mkPNG",         0, 0, 'G'}, /* Ephemeris */
+    {"now",           0, 0, 'N'}, /* Calculate for "Now" */
+    {"PParAng",       0, 0, 'P'}, /* Print Paralactic Angle */
+    {"telescope",     1, 0, 'T'}, /* Telescope */
+    {"UTC",           1, 0, 'U'}, /* Calculate for "UTC */
+    {"wait",          0, 0, 'W'}, /* wait */
+    {"airmass",       1, 0, 'X'}, /* Maximum Airmass */
+    {"PwrtX",         0, 0, 'Y'}, /* Print with respect to Airmass */
+    {"PwrtZ",         0, 0, 'Z'}, /* Print with respect to ZD */
+    {"ha_range",      1, 0, 'a'}, /* Hour Angle Range */
     {"coordinates",   1, 0, 'c'}, /* Coordinates : RA,Dec */
     {"disttomoon",    1, 0, 'd'}, /* Distance to the moon */
-    {"ephemeris",     1, 0, 'E'}, /* Ephemeris */
     {"expduration",   1, 0, 'e'}, /* Exposure Duration */
     {"help",          0, 0, 'h'}, /* help */
     {"jd",            1, 0, 'j'}, /* Julian Date interval */
@@ -260,11 +269,9 @@ RETURN VALUE
     {"moon",          0, 0, 'm'}, /* Display moon parameters */
     {"overhead",      1, 0, 'o'}, /* Overhead */
     {"phaseinterval", 1, 0, 'p'}, /* Phase interval */
-    {"PParAng",       1, 0, 'P'}, /* Print Paralactic Angle */
-    {"PwrtX",         1, 0, 'Y'}, /* Print with respect to Airmass */
-    {"PwrtZ",         1, 0, 'Z'}, /* Print with respect to ZD */
-    {"now",           0, 0, 'N'}, /* Calculate for "Now" */
-    {"UTC",           1, 0, 'U'}, /* Calculate for "UTC */
+    {"quiet",         0, 0, '1'}, /* quiet */
+    {"refWL",         1, 0, 'r'}, /* refernce WaveLength */
+    {"BEoNAlt",       1, 0, 's'}, /* Altitude for Begining/End of night calculation */
     { 0, 0, 0, 0 }
   };
 
@@ -323,7 +330,7 @@ RETURN VALUE
     c = getopt_long (
       argc,
       argv,
-      "A:DGNPT:X:U:WXYZa:c:d:e:E:hj:l:mo:p:qr:s:t:vw:x:y:z:",
+      "A:DE:GNPT:U:WX:YZa:c:d:e:hj:l:mo:p:qr:s:t:vw:x:y:z:",
       longopts,
       &option_index
     );
