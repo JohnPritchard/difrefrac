@@ -59,7 +59,8 @@ Note:\n\
  *)  -G, Make output PNG files, default file names.\n\
  *)  -P, Make output PS files, default file names.\n\
  *)  -X, No X display.\n\
- *)  -Z, Plot with respect to Hour Angle.\n\
+ *)  -Z, Plot with respect to Zenith Distance (deafult is wrt Hour Angle).\n\
+ *)  -Y, Plot with respect to Airmass (deafult is wrt Hour Angle).\n\
  *)  -W, Wait for <enter> after making plots\n\
  *)  <RA,Dec[,Epoch]> should be specified in hh:mm:ss.s,dd:mm:ss.s[,yyyy.y]\n\
 format. If no coordinates are specified Sunset and Sunrise [SSSR] and Begining\n\
@@ -136,7 +137,7 @@ int main ( int argc, char **argv )
   int nhapts;
   float xs, xf, ys, yf, yt;
 
-  bool bXdisp=1, bPwrtZ=1, bPwrtD=0, bMkPS=0, bAutoPSFileNames=0, bMkpng=0, bWaitAP=0;
+  bool bXdisp=1, bPwrtX=1, bPwrtZ=1, bPwrtD=0, bMkPS=0, bAutoPSFileNames=0, bMkpng=0, bWaitAP=0;
   short psDev, XDev, pngDev;
   char ofile[200], title[300], ystr[100];
 
@@ -260,6 +261,7 @@ RETURN VALUE
     {"overhead",      1, 0, 'o'}, /* Overhead */
     {"phaseinterval", 1, 0, 'p'}, /* Phase interval */
     {"PParAng",       1, 0, 'P'}, /* Print Paralactic Angle */
+    {"PwrtX",         1, 0, 'Y'}, /* Print with respect to Airmass */
     {"PwrtZ",         1, 0, 'Z'}, /* Print with respect to ZD */
     {"now",           0, 0, 'N'}, /* Calculate for "Now" */
     {"UTC",           1, 0, 'U'}, /* Calculate for "UTC */
@@ -398,6 +400,10 @@ RETURN VALUE
 
     case 'W':
       bWaitAP=1;
+      break;
+
+    case 'Y':
+      bPwrtX=0;
       break;
 
     case 'Z':
@@ -581,6 +587,7 @@ RETURN VALUE
       cpgenv(xs, xf, ys, yf, 0, 1);
     }
     str="HA [hrs]";
+    if ( bPwrtX ) str="Airmass";
     if ( bPwrtZ ) str="Zenith Distance (degrees)";
     sprintf(ystr,"Separation (r) [arcsec]");
     sprintf(title,"UDP=%d[sec], WL=%5.1f[nm], refWL=%5.1f[nm], Temp=%5.1f[K], Pres=%5.1f[mB]",udp,WL,refWL,Ta,Pa/100.);
@@ -594,6 +601,10 @@ RETURN VALUE
       if (( ys < yt ) && ( yf > yt )) {
         cpgmove(xs,yt);
         cpgdraw(xf,yt);
+      }
+      if ( bPwrtX && (( xs < 60. ) && ( xf > 060 ))) {
+        cpgmove(60.,ys);
+        cpgdraw(60.,yf);
       }
       if ( bPwrtZ && (( xs < 60. ) && ( xf > 060 ))) {
         cpgmove(60.,ys);
@@ -661,6 +672,7 @@ From http://www.ls.eso.org/lasilla/sciops/2p2/E2p2M/FEROS/Projects/ADC/index.htm
             printf(" : Z=%f[deg] : DRF=%f[arcsec] : DeltaDRF=%f[arcsec]\n",Zs*DEG_IN_RADIAN,difrefrac*tan(Zs),difrefrac*(tan(Zs)-tan(Ze)));
           */
           vx[i]=rha+1.0*udp/2.0/3600.0;
+          if ( bPwrtX ) vx[i]=sec(Zm);
           if ( bPwrtZ ) vx[i]=Zm*DEG_IN_RADIAN;
           vy[i]=rse;
           if ( bPwrtD ) vy[i]=fabs(drf);
