@@ -137,7 +137,7 @@ int main ( int argc, char **argv )
   int nhapts;
   float xs, xf, ys, yf, yt;
 
-  bool bXdisp=1, bPwrtX=1, bPwrtZ=1, bPwrtD=0, bMkPS=0, bAutoPSFileNames=0, bMkpng=0, bWaitAP=0;
+  bool bXdisp=1, bPwrtX=0, bPwrtZ=0, bPwrtD=0, bMkPS=0, bAutoPSFileNames=0, bMkpng=0, bWaitAP=0;
   short psDev, XDev, pngDev;
   char ofile[200], title[300], ystr[100];
 
@@ -403,11 +403,11 @@ RETURN VALUE
       break;
 
     case 'Y':
-      bPwrtX=0;
+      bPwrtX=1;
       break;
 
     case 'Z':
-      bPwrtZ=0;
+      bPwrtZ=1;
       break;
 
     case 'a':
@@ -576,7 +576,11 @@ RETURN VALUE
      */
     if ( bMkpng ) {
       cpgslct(pngDev);
-      cpgenv(xs, xf, ys, yf, 0, 1);
+      if ( bPwrtX ) {
+        cpgenv(1./cos(xs*DEG_IN_RADIAN), 1./cos(xf*DEG_IN_RADIAN), ys, yf, 0, 1);
+      } else {
+        cpgenv(xs, xf, ys, yf, 0, 1);
+      }
     }
     if ( bMkPS ) {
       cpgslct(psDev);
@@ -603,8 +607,8 @@ RETURN VALUE
         cpgdraw(xf,yt);
       }
       if ( bPwrtX && (( xs < 60. ) && ( xf > 060 ))) {
-        cpgmove(60.,ys);
-        cpgdraw(60.,yf);
+        cpgmove(1./cos(60.*DEG_IN_RADIAN),ys);
+        cpgdraw(1./cos(60.*DEG_IN_RADIAN),yf);
       }
       if ( bPwrtZ && (( xs < 60. ) && ( xf > 060 ))) {
         cpgmove(60.,ys);
@@ -618,6 +622,10 @@ RETURN VALUE
         cpgmove(xs,0.2);
         cpgdraw(xf,0.2);
       }
+      if ( bPwrtX && (( xs < 60. ) && ( xf > 060 ))) {
+        cpgmove(1./cos(60.*DEG_IN_RADIAN),ys);
+        cpgdraw(1./cos(60.*DEG_IN_RADIAN),yf);
+      }
       if ( bPwrtZ && (( xs < 60. ) && ( xf > 060 ))) {
         cpgmove(60.,ys);
         cpgdraw(60.,yf);
@@ -629,6 +637,10 @@ RETURN VALUE
       if (( ys < 0.2 ) && ( yf > 0.2 )) {
         cpgmove(xs,0.2);
         cpgdraw(xf,0.2);
+      }
+      if ( bPwrtX && (( xs < 60. ) && ( xf > 060 ))) {
+        cpgmove(1./cos(60.*DEG_IN_RADIAN),ys);
+        cpgdraw(1./cos(60.*DEG_IN_RADIAN),yf);
       }
       if ( bPwrtZ && (( xs < 60. ) && ( xf > 060 ))) {
         cpgmove(60.,ys);
