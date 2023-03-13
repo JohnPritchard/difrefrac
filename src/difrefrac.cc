@@ -592,8 +592,7 @@ RETURN VALUE
       cpgenv(xs, xf, ys, yf, 0, 1);
     }
     str="HA [hrs]";
-    printf('bPwrtX');
-    printf(bPwrtX);
+    printf("bPwrtX");
     if ( bPwrtX ) str="Airmass";
     if ( bPwrtZ ) str="Zenith Distance (degrees)";
     printf(str);
