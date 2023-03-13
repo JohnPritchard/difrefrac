@@ -415,7 +415,6 @@ RETURN VALUE
       break;
 
     case 'Y':
-      printf("Plotting with respect to Airmass");
       bPwrtX=1;
       break;
 
@@ -604,10 +603,8 @@ RETURN VALUE
       cpgenv(xs, xf, ys, yf, 0, 1);
     }
     str="HA [hrs]";
-    printf("bPwrtX");
     if ( bPwrtX ) str="Airmass";
     if ( bPwrtZ ) str="Zenith Distance (degrees)";
-    printf(str);
     sprintf(ystr,"Separation (r) [arcsec]");
     sprintf(title,"UDP=%d[sec], WL=%5.1f[nm], refWL=%5.1f[nm], Temp=%5.1f[K], Pres=%5.1f[mB]",udp,WL,refWL,Ta,Pa/100.);
     if ( bPwrtD ) {
