@@ -403,7 +403,7 @@ RETURN VALUE
       break;
 
     case 'Y':
-      printf('Plotting with respect to Airmass');
+      printf("Plotting with respect to Airmass");
       bPwrtX=1;
       break;
 
