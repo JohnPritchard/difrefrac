@@ -24,7 +24,7 @@
 #include <string.h>
 #include <time.h>
 
-#include "libskycalc.h"
+#include <libskycalc.h>
 
 #define MAX(A,B) (((A)>(B)) ? (A) : (B))
 #define MIN(A,B) (((A)<(B)) ? (A) : (B))
