@@ -320,8 +320,13 @@ RETURN VALUE
   PrismAngle=1.5/60.0/60.0;
 
   while (1) {
-    c = getopt_long (argc, argv, "A:DGNPT:X:U:WXZa:c:d:e:E:hj:l:mo:p:qr:s:t:vw:x:y:z:",
-                     longopts, &option_index);
+    c = getopt_long (
+      argc,
+      argv,
+      "A:DGNPT:X:U:WXYZa:c:d:e:E:hj:l:mo:p:qr:s:t:vw:x:y:z:",
+      longopts,
+      &option_index
+    );
     if (c == -1)
       break;
 
