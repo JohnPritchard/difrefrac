@@ -43,6 +43,7 @@ LDKINC     = -I $(LDKD)/include
 LDKLIB     = $(LDKD)/lib
 LDKLIBA    = $(LDKLIB)/libdifrefrac.a
 
+BIND       = ../bin
 BINS	   = $(BIND)/difrefrac
 INCLUDE    = $(LDKINC)
 LIBS       = -L$(LDKLIB) -ldifrefrac @LIBS@
