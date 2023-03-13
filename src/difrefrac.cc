@@ -672,7 +672,7 @@ From http://www.ls.eso.org/lasilla/sciops/2p2/E2p2M/FEROS/Projects/ADC/index.htm
             printf(" : Z=%f[deg] : DRF=%f[arcsec] : DeltaDRF=%f[arcsec]\n",Zs*DEG_IN_RADIAN,difrefrac*tan(Zs),difrefrac*(tan(Zs)-tan(Ze)));
           */
           vx[i]=rha+1.0*udp/2.0/3600.0;
-          if ( bPwrtX ) vx[i]=sec(Zm);
+          if ( bPwrtX ) vx[i]=1./cos(Zm);
           if ( bPwrtZ ) vx[i]=Zm*DEG_IN_RADIAN;
           vy[i]=rse;
           if ( bPwrtD ) vy[i]=fabs(drf);
