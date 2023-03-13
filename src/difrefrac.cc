@@ -590,7 +590,7 @@ RETURN VALUE
     if ( bMkpng ) {
       cpgslct(pngDev);
       if ( bPwrtX ) {
-        cpgenv(1./cos(xs*DEG_IN_RADIAN), 1./cos(xf*DEG_IN_RADIAN), ys, yf, 0, 1);
+        cpgenv(1./cos(xs/DEG_IN_RADIAN), 1./cos(xf/DEG_IN_RADIAN), ys, yf, 0, 1);
       } else {
         cpgenv(xs, xf, ys, yf, 0, 1);
       }
@@ -622,8 +622,8 @@ RETURN VALUE
         cpgdraw(xf,yt);
       }
       if ( bPwrtX && (( xs < 60. ) && ( xf > 060 ))) {
-        cpgmove(1./cos(60.*DEG_IN_RADIAN),ys);
-        cpgdraw(1./cos(60.*DEG_IN_RADIAN),yf);
+        cpgmove(1./cos(60./DEG_IN_RADIAN),ys);
+        cpgdraw(1./cos(60./DEG_IN_RADIAN),yf);
       }
       if ( bPwrtZ && (( xs < 60. ) && ( xf > 060 ))) {
         cpgmove(60.,ys);
@@ -638,8 +638,8 @@ RETURN VALUE
         cpgdraw(xf,0.2);
       }
       if ( bPwrtX && (( xs < 60. ) && ( xf > 060 ))) {
-        cpgmove(1./cos(60.*DEG_IN_RADIAN),ys);
-        cpgdraw(1./cos(60.*DEG_IN_RADIAN),yf);
+        cpgmove(1./cos(60./DEG_IN_RADIAN),ys);
+        cpgdraw(1./cos(60./DEG_IN_RADIAN),yf);
       }
       if ( bPwrtZ && (( xs < 60. ) && ( xf > 060 ))) {
         cpgmove(60.,ys);
@@ -654,8 +654,8 @@ RETURN VALUE
         cpgdraw(xf,0.2);
       }
       if ( bPwrtX && (( xs < 60. ) && ( xf > 060 ))) {
-        cpgmove(1./cos(60.*DEG_IN_RADIAN),ys);
-        cpgdraw(1./cos(60.*DEG_IN_RADIAN),yf);
+        cpgmove(1./cos(60./DEG_IN_RADIAN),ys);
+        cpgdraw(1./cos(60./DEG_IN_RADIAN),yf);
       }
       if ( bPwrtZ && (( xs < 60. ) && ( xf > 060 ))) {
         cpgmove(60.,ys);
