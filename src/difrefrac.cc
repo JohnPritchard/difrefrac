@@ -256,7 +256,6 @@ RETURN VALUE
     {"telescope",     1, 0, 'T'}, /* Telescope */
     {"UTC",           1, 0, 'U'}, /* Calculate for "UTC */
     {"wait",          0, 0, 'W'}, /* wait */
-    {"airmass",       1, 0, 'X'}, /* Maximum Airmass */
     {"PwrtX",         0, 0, 'Y'}, /* Print with respect to Airmass */
     {"PwrtZ",         0, 0, 'Z'}, /* Print with respect to ZD */
     {"ha_range",      1, 0, 'a'}, /* Hour Angle Range */
@@ -274,6 +273,7 @@ RETURN VALUE
     {"BEoNAlt",       1, 0, 's'}, /* Altitude for Begining/End of night calculation */
     { 0, 0, 0, 0 }
   };
+  //  {"airmass",       1, 0, 'X'}, /* Maximum Airmass */
 
   ct=time(NULL)+12*3600;
   lt=*localtime( &ct );
@@ -330,7 +330,7 @@ RETURN VALUE
     c = getopt_long (
       argc,
       argv,
-      "A:DE:GNPT:U:WX:YZa:c:d:e:hj:l:mo:p:qr:s:t:vw:x:y:z:",
+      "A:DE:GNPT:U:WXYZa:c:d:e:hj:l:mo:p:qr:s:t:vw:x:y:z:",
       longopts,
       &option_index
     );
