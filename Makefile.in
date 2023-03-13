@@ -18,6 +18,7 @@
 #  Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
 
 SUBDIRS    = libsrc src
+INSTSUBDIRS = src
 
 all:
 	set -e; for i in $(SUBDIRS); do\
@@ -27,7 +28,7 @@ all:
 	done
 
 install:
-	set -e; for i in $(SUBDIRS); do\
+	set -e; for i in $(INSTSUBDIRS); do\
 	  cd $$i ;\
 	  $(MAKE) install ;\
 	  cd .. ;\

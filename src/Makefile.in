@@ -23,26 +23,36 @@ CFLAGS = @CFLAGS@
 #CFLAGS = -O -Wall -Wno-unused
 #### For HPUX
 #CFLAGS = -Ae -O -Wall
+RANLIB = @RANLIB@
+INSTALL = @INSTALL@
+STRIP = strip
 LN = ln
 LNOPTS = -sfv
+RM = rm
+RMOPTS = -fv
 
-## @have_libskycalch@
-
-STRIP = strip
-
-BIND       = ../bin
+prefix = $(DESTDIR)@prefix@
+exec_prefix = @exec_prefix@
+bindir = $(exec_prefix)/bin
+libdir = @libdir@
+includedir = @includedir@
+infodir = @infodir@
 
 LDKD       = ..
 LDKINC     = -I $(LDKD)/include
 LDKLIB     = $(LDKD)/lib
 LDKLIBA    = $(LDKLIB)/libdifrefrac.a
 
+BINS	   = $(BIND)/difrefrac
 INCLUDE    = $(LDKINC)
 LIBS       = -L$(LDKLIB) -ldifrefrac @LIBS@
 
 SUBDIRS =
 
 all:	$(BIND)/difrefrac
+
+install: $(BINS)
+	 $(INSTALL) -m 0755 $(BINS) $(bindir)
 
 .PHONY: clean dep
 
