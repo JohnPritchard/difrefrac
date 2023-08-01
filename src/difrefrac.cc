@@ -617,11 +617,11 @@ RETURN VALUE
         cpgmove(xs,yt);
         cpgdraw(xf,yt);
       }
-      if ( bPwrtX && (( xs < 60. ) && ( xf > 060 ))) {
+      if ( bPwrtX && (( xs < 60. ) && ( xf > 60. ))) {
         cpgmove(1./cos(60./DEG_IN_RADIAN),ys);
         cpgdraw(1./cos(60./DEG_IN_RADIAN),yf);
       }
-      if ( bPwrtZ && (( xs < 60. ) && ( xf > 060 ))) {
+      if ( bPwrtZ && (( xs < 60. ) && ( xf > 60. ))) {
         cpgmove(60.,ys);
         cpgdraw(60.,yf);
       }
@@ -633,11 +633,11 @@ RETURN VALUE
         cpgmove(xs,0.2);
         cpgdraw(xf,0.2);
       }
-      if ( bPwrtX && (( xs < 60. ) && ( xf > 060 ))) {
+      if ( bPwrtX && (( xs < 60. ) && ( xf > 60. ))) {
         cpgmove(1./cos(60./DEG_IN_RADIAN),ys);
         cpgdraw(1./cos(60./DEG_IN_RADIAN),yf);
       }
-      if ( bPwrtZ && (( xs < 60. ) && ( xf > 060 ))) {
+      if ( bPwrtZ && (( xs < 60. ) && ( xf > 60. ))) {
         cpgmove(60.,ys);
         cpgdraw(60.,yf);
       }
