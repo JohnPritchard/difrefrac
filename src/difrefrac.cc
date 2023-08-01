@@ -41,7 +41,7 @@ void usage( char ** argv )
   */
 
   printf ("Usage : %s [-h|--help|-v]\n\
-             [-PGXWZ]\n\
+             [-DPGXWZ]\n\
              [-p <UpDate-Period> [integer sec] (3600)>]\n\
              [-a <HA[i],HA[f],HA[s] [decimal hrs] (-6.0,6.0,1/3600.)>]\n\
              [-c <RA>,<DEC>]\n\
@@ -53,15 +53,14 @@ void usage( char ** argv )
              [-r <reference-WL [nm] (550.454 i.e. Johnson V)>]\n\
              [-A <T,P [C,mb] (10.0,775.0)>]\n\
              [-T <telescope (2p2)>]\n\
-             [-D] (differential refraction rather than UDP separation)\n\
-             [-F]\n\
 \n\
 Note:\n\
+ *)  -D, differential refraction rather than UpDate-Period [UDP] separation\n\
  *)  -G, Make output PNG files, default file names.\n\
  *)  -P, Make output PS files, default file names.\n\
  *)  -X, No X display.\n\
- *)  -Z, Plot with respect to Zenith Distance (deafult is wrt Hour Angle).\n\
- *)  -Y, Plot with respect to Airmass (deafult is wrt Hour Angle).\n\
+ *)  -Z, Plot with respect to Zenith Distance (default is wrt Hour Angle).\n\
+ *)  -Y, Plot with respect to Airmass (default is wrt Hour Angle).\n\
  *)  -W, Wait for <enter> after making plots\n\
  *)  <RA,Dec[,Epoch]> should be specified in hh:mm:ss.s,dd:mm:ss.s[,yyyy.y]\n\
 format. If no coordinates are specified Sunset and Sunrise [SSSR] and Begining\n\
@@ -603,7 +602,7 @@ RETURN VALUE
       cpgenv(xs, xf, ys, yf, 0, 1);
     }
     str="HA [hrs]";
-    if ( bPwrtX ) str="Airmass";
+    if ( bPwrtX ) str="Airmass" ;
     if ( bPwrtZ ) str="Zenith Distance (degrees)";
     sprintf(ystr,"Separation (r) [arcsec]");
     sprintf(title,"UDP=%d[sec], WL=%5.1f[nm], refWL=%5.1f[nm], Temp=%5.1f[K], Pres=%5.1f[mB]",udp,WL,refWL,Ta,Pa/100.);
